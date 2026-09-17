@@ -1,0 +1,104 @@
+/* animation correct ou faux  */
+
+body {
+    font-family: 'Poppins', sans-serif; /*font-family: Georgia, "Times New Roman", serif;*/
+    background-color: #f5f5f5;
+    margin: 0;
+    /* 
+    min-height: 50vh;
+    display: flex;
+    justify-content: center;
+    align-items: center; */
+}
+
+.correct{
+    color : green;
+    font-size : 1rem;
+    transition : 0.3s;
+}
+
+.incorrect{
+    color : red;
+    font-size : 1rem;
+    transition : 0.3s;
+}
+
+/* body.dark{
+    background-color: black;
+    color: white;
+} */
+
+#messageFinale {
+    opacity: 0;
+    transition: opacity 0.5s;
+}
+
+#messageFinale.show {
+    opacity : 1;
+}
+/* ------Container qui rassemble tous les éléments visible sur notre page ------ */
+#gameContainer{
+    max-width: 600px; /*définit une largeur de 600px*/
+    margin : 40px auto;
+    padding : 20px;
+    background-color: #ffffff;
+    border-radius: 12px;
+    text-align: center; /*centrer le texte*/
+    /* row , justify content = x , align items = y vice versa pour column */
+    box-shadow:0 4px 20px rgba(0,0,0,0.1)
+}
+
+
+#motAffiche{
+    font-size: 2rem; /*taille du texte*/
+    font-weight : 600; /*texte plus gras*/
+
+    border-bottom: 3px solid rgb(231, 116, 198); /*créer une ligne en dessous de notre texte*/
+    transition : 0.3s; /*animation d'apaparition*/
+}
+
+button{
+    padding : 10px 20px; /* 2 valeurs donc 20px = vertical <---> 10px = horizontal */
+    border: none; /*enleve le conteur*/
+    border-radius: 8px;
+    background-color: #f5f5f5;
+    cursor: pointer; /*en survolant un bouton la souris devient une main*/
+    transition: 0.5s;
+}
+
+button:hover{
+    transform: scale(0.9);
+    background-color: #e9e1e1;
+}
+
+input{
+    padding: 5px;
+    width : 200px;
+    text-align: center;
+}
+
+
+#logo{
+    position : absolute; /*sort du flux HTML, n'affecte plus la position des autres éléments*/
+    left : 20px;
+    top : 10px;
+    font-size : 2rem;
+    cursor : pointer;
+}
+footer{
+    text-align: center;
+    margin-top: 100px;
+}
+/* #gameblock{
+    display : flex;
+    flex-direction: column;
+    align-items: center;
+    
+    background-color: rgb(233, 7, 233);
+    border-radius : 20px;
+
+    width: 600px;
+    z-index: 9;
+} */
+
+

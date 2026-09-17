@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet"> <!-- importation d'une police moderne -->
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
+    <title>Input!</title>
+</head>
+<body>
+    <div id="logo" title="Rien à cliquer ici... essaye autre part...">⌨️</div>
+    <div id= "gameContainer">
+    <h1>Input! </h1>
+    <div id="zoneBtn">
+        <button id="easyMode">Facile</button>
+        <button id="mediumMode">Moyen</button>
+        <button id="hardMode">Difficile</button>
+    </div>
+    
+    <div id="zoneVies">
+        <p id="vies"> Nombres de vies : ❤️ ❤️ ❤️ </p>
+    </div>
+    <div id="zoneJeu">
+        <p id ="motAffiche"></p>
+        <input type="text" id = "inputJoueur" placeholder= "Tape le mot ici">
+        <button id="btnValider">Valider</button>
+
+        <p id="scoreMot">Score : 0</p>
+        <p id="timerMot">Temps restants  : 30 sec.</p>
+
+        <button id = "btnRejouer" style ="display:none;">Rejouer</button>
+        <p id ="bestScore"></p>
+        <p id="messageFinale"></p>
+    </div>
+
+    <div id="sound">
+        <audio id = "soundCorrect" src ="audio/correct.mp3"></audio>
+        <audio id = "soundIncorrect" src="audio/incorrect.mp3"></audio>
+        <audio id = "soundGameOver" src="audio/end.mp3"></audio>
+    </div>
+    
+    </div>
+
+    <footer>
+        <p>© 2026 — Bandiougou Traore</p>
+    </footer>
+</body>
+</html>
