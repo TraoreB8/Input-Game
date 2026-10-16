@@ -28,8 +28,10 @@
 
         <p id="scoreMot">Score : 0</p>
         <p id="timerMot">Temps restants  : 30 sec.</p>
-
-        <button id = "btnRejouer" style ="display:none;">Rejouer</button>
+        <div id="boutonContainer">
+            <button id = "btnRejouer" style ="display:none;">Rejouer</button>
+            <button id = "btnPartager" style="display:none;">Partager</button>
+        </div>
         <p id ="bestScore"></p>
         <p id="messageFinale"></p>
     </div>
@@ -40,6 +42,17 @@
         <audio id = "soundGameOver" src="audio/end.mp3"></audio>
     </div>
     
+    </div>
+    
+    <div id="popupScore" style="display:none;">
+        <form>
+            <label for="nom">Nom</label>
+            <input type="text" id="nom" placeholder="saisir un nom">
+            
+            <label for="email">Email</label>
+            <input type="email" id="email" placeholder="saisir un mail">
+            <button type="submit">Valider</button>
+        </form>
     </div>
 
     <footer>

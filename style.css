@@ -72,9 +72,15 @@ button:hover{
 }
 
 input{
-    padding: 5px;
     width : 200px;
     text-align: center;
+    border: 1px solid gray;
+
+    border-radius: 8px;
+    padding: 10px 12px;
+    outline: none;
+    transition: border-color 0.2s ease;
+    
 }
 
 
@@ -102,3 +108,39 @@ footer{
 } */
 
 
+/* On définit une nouvelle position car :  div flex a l'intérieur d'un autre div n'hérite pas de toutes les fonctionnalités du div parent */
+#boutonContainer{
+    display : flex;
+    width: fit-content;
+    justify-content: center;
+    align-items: center;
+    margin : 0 auto;
+    gap : 15px;
+}
+
+#popupScore{
+    display: none;
+    text-align: center;
+    gap : 30px;
+}
+#popupScore input{
+     margin-right : 15px;
+     /* Avec gap ->il faut display: flex ou display: grid
+        Sans gap -> tu peux utiliser margin-right, margin-left */
+}
+
+#popupScore button[type="submit"]{
+    background-color: orange;
+}
+
+
+
+/* Email */
+
+.green{
+    border-color: green;
+}
+
+.red{
+    border-color: red;
+}

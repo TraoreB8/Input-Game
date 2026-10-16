@@ -50,12 +50,22 @@ let uneVie = 3;
 
 // Vitesse dans le cas on a chaque fois qu'on score de 5 en 5 la variable va changer.
 let vitesse = 1000;
-
+//--------------------Enregistrement du score via LocalStorage--------------
 let savedScore = localStorage.getItem("bestScore") || 0;
 console.log(savedScore) //vérifier qu'on a bien récup la valeur
 
 let meilleurScore = document.getElementById("bestScore");
 meilleurScore.textContent = "Meilleur score : " + savedScore;
+
+// ---------------------------- Partager le score---------------------------
+let boutonShare = document.getElementById("btnPartager");
+let popupScore = document.getElementById("popupScore");
+
+
+let form = document.querySelector("form");
+let champNom = document.getElementById("nom");
+let champEmail = document.getElementById("email");
+
 
 
 //function
@@ -67,6 +77,12 @@ function resetJeu(){
     bouton.disabled = false;
     inputJoueur.disabled = false;
     boutonReset.style.display = "none";
+
+
+    boutonShare.style.display= "none";
+    popupScore.style.display = "none";
+    messageF.textContent = "";
+
 
     uneVie = 3;
     MajVies();
@@ -89,6 +105,9 @@ function resetJeu(){
         zoneTimer.textContent = "Fin";
         boutonReset.style.display = "block";
         document.getElementById("soundGameOver").play();
+
+        boutonShare.style.display = "block";
+        messageF.textContent = "Fin du jeu ! Score de " + score + " pts ! "
     }
     
 }, vitesse);
@@ -141,6 +160,12 @@ bouton.addEventListener("click" , ()=>{
 
 })
 
+inputJoueur.addEventListener("keydown", function(event){
+    if(event.key === "Enter"){
+        bouton.click();
+    }
+})
+
 //--------------------------------- TIMER DU JEU ------------------------------//
 
 let interval = setInterval(() => { //l'intervalle du jeu 30 sec et chaque secondes on descend d'une sec
@@ -154,6 +179,9 @@ let interval = setInterval(() => { //l'intervalle du jeu 30 sec et chaque second
         zoneTimer.textContent = "Fin";
         boutonReset.style.display = "block";
         boutonReset.style.margin = "0 auto"; /*bouton au milieu*/
+
+        boutonShare.style.display = "block";
+        boutonShare.style.margin = "0 auto";
         
         document.getElementById("soundGameOver").play();
             // Message de fin & Styles
@@ -200,13 +228,84 @@ btnHard.addEventListener("click", ()=>{
 });
 
 
-/*Utile*/
-let emoji = document.getElementById("logo");
 
-emoji.addEventListener("click", ()=>{
-    emoji.textContent = "Je t'avais prévenu.";
+//---------------Partage du score par mail----------
 
-    setTimeout(() => {
-        emoji.textContent = "⌨️";
-    }, 1500);
-});
+
+function mailSend(nom , email, score, bestScore){
+    const subject = "Score partagé du jeu 'Input!' ";
+    const corps = `Score du joueur ${nom.value} : ${score}\n Meilleur score : ${bestScore}`;
+
+    const mail = `mailto:${email.value}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(corps)}`;
+    window.location.href = mail;
+}
+//Affiche de notre PopPup
+boutonShare.addEventListener("click", ()=>{
+    popupScore.style.display = "block";
+})
+
+//On écoute l'événement en cliquant sur le bouton valider
+
+form.addEventListener("submit", function(event){
+    event.preventDefault();
+
+    const nomValide = verifNom(champNom);
+    const mailValide = verifMail(champEmail);
+
+    if( nomValide && mailValide ){
+        mailSend(champNom, champEmail, score , savedScore);
+    }
+    else{
+        console.log("erreur")
+    }
+})
+
+
+// Voir instantanement si notre champ respecte les règles
+
+
+champNom.addEventListener('input', (event)=>{
+    verifNom(event.target);    
+})
+
+champEmail.addEventListener('input', (event)=>{
+    verifMail(event.target);
+})
+
+//--------------Expresssions régulières----------------
+
+
+function verifNom(unNom){
+    
+    const maRegex = /^[a-zA-Z_.-]{2,}$/;
+    if(maRegex.test(unNom.value.trim() )){
+        unNom.classList.add("green");
+        unNom.classList.remove("red");
+
+        return true;
+    }
+    else{
+        unNom.classList.add("red");
+        unNom.classList.remove("green");
+        
+        return false;
+    }
+}
+
+function verifMail(unEmail){
+
+    let mailRegex = /^[a-zA-Z0-9_.-]+@[a-zA-Z0-9_.-]+\.[a-zA-Z]{2,}$/;
+
+    if(mailRegex.test(unEmail.value.trim() )){
+        unEmail.classList.add("green");
+        unEmail.classList.remove("red");
+
+        return true;
+    }
+    else{
+        unEmail.classList.add("red");
+        unEmail.classList.remove("green");
+
+        return false;
+    }
+}
